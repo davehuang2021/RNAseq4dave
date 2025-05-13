@@ -23,7 +23,7 @@
 
 ## GTEX
 
-#GTDRoutine
+#notebook #GTDRoutine 以下文件添加这2个标签，表明这是一些个人编辑的文件，并且是一些不用动脑的任务
 
 ## oncology
 
