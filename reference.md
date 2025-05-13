@@ -24,6 +24,11 @@
 
 []()
 
+## training and courses
+- [A community challenge to predict clinical outcomes after immune checkpoint blockade in non-small cell lung cancer](https://translational-medicine.biomedcentral.com/articles/10.1186/s12967-023-04705-3)
+> 一个很棒的biomarker挑战赛的结果，用于熟悉目前最佳的范式：Predictive biomarkers of immune checkpoint inhibitor (ICI) efficacy 
+- []()
+
 ## diary or logs
 
 ### 2025-5-13
