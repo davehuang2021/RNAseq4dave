@@ -1,0 +1,130 @@
+---
+title: GSE166927 combine symbol to counts
+output: html_notebook
+---
+
+## system
+
+-   cmd+D: 删除光标所在当前行:
+
+-   alt+-: 插入赋值号 \<- : Alt + -（R语言里几乎最常用的快捷键了）
+
+-   %\>%: shift+ctrl
+
+-   插入管道操作符 : Ctrl + Shift + M（和tidyverse配套使用有奇效）
+
+-   ctrl+shift+c: 注视掉所选代码块
+
+-   执行行：cmd+enter
+
+-   执行块：cmd+shift+enter
+
+```{r}
+system("open .")
+```
+
+```{r}
+# BiocManager::install("BiocStyle") %>% 
+# BiocManager::install("limma")
+# BiocManager::install("Glimma")
+# BiocManager::install("tidyverse",force = TRUE)
+# BiocManager::install("Mus.musculus",force = TRUE)
+# BiocManager::install("Homo.sapiens",force = TRUE)
+
+# BiocManager::install("dplyr",force = TRUE)
+# BiocManager::install("GEOquery",force = TRUE)
+# BiocManager::install("tidyverse")
+# BiocManager::install("Homo.sapiens")
+```
+
+## setup
+
+```{r}
+library(BiocStyle)
+library(knitr)
+options(digits=3)
+options(width=120)
+```
+
+## library
+
+```{r}
+# library(tidyverse)
+library(limma)
+library(Glimma)
+library(edgeR)
+# library(tximport)
+library(GEOquery)
+library(Homo.sapiens)
+library(recount3)
+library(DESeq2)
+```
+
+-   [GSE117993](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE117993)
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+rse <- recount3::create_rse_manual(
+    project = "SRP155976",
+    project_home = "data_sources/sra",
+    organism = "human",
+    annotation = "gencode_v26",
+    type = "gene"
+)
+```
+
+## read counts from recount
+
+```{r}
+assays(rse)$counts<-transform_counts(rse)
+rse
+# recount3::transform_counts()
+```
+
+## DGEList
+
+#### convert to ncbi gene exp table
+
+```{r}
+# dim(rse@assays@data$counts)
+# [1] 63856   192
+cnt_t <- as_tibble(rse@assays@data$counts,rownames=NA) %>% 
+  rownames_to_column(var = "RowNames") %>% ### 保留rownames
+  mutate(ENSEMBL=substr(RowNames, 1, 15)) ### 修建ENSEMBL ID
+print("add ensembl")
+dim(cnt_t)
+#[1] 63856   192
+
+cnt_t <- cnt_t[!duplicated(cnt_t[["ENSEMBL"]]),]
+print("rm duplicate by ensembl")
+dim(cnt_t)
+#[1] 63811   192
+
+
+genes <- AnnotationDbi::select(Homo.sapiens, keys=cnt_t[["ENSEMBL"]]
+                , columns=c("SYMBOL", "ENTREZID","ENSEMBL"), keytype="ENSEMBL")
+genes <- genes[!duplicated(genes[["ENSEMBL"]]),]
+
+cnt_t <- cnt_t %>% left_join(genes, by = "ENSEMBL")
+print("add SYMBOL, ENTREZID")
+dim(cnt_t)
+#[1] 63811   194
+
+
+#cnt_t <- cnt_t[!duplicated(cnt_t[["ENTREZID"]]),]
+#print("rm duplicate by ENTREZID")
+#dim(cnt_t)
+write.table(cnt_t, file = paste("cnt_t",".tsv",sep="_"), sep = "\t", row.names = TRUE, col.names = TRUE)
+```
+
+```{r}
+cnt_t <- filter(cnt_t,!is.na(ENTREZID))
+dim(cnt_t)
+
+cnt_t <- cnt_t %>%
+  column_to_rownames(var = "ENTREZID")
+
+```
