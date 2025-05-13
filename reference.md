@@ -1,11 +1,28 @@
 ## reseach paper
 
+### IBD
+
+### SLE
+
+### IgAN
+
+### IPF/COPD
+
+### oncology
+
+#### ESCA
+
+
 ## books
+
+## Technology
 
 ## website and links
 
 [Obsidian + ChatGPT + Excalidraw：打造高效学习与知识沉淀系统](https://www.ifb.me/zh/blog/ai/obsidian)
->
+>写得太简单了，连个vlog的量都不够。现在的年轻人写博客能不能用点心
+
+[]()
 
 ## diary or logs
 
