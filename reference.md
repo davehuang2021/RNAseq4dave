@@ -26,7 +26,9 @@
 
 ## training and courses
 - [A community challenge to predict clinical outcomes after immune checkpoint blockade in non-small cell lung cancer](https://translational-medicine.biomedcentral.com/articles/10.1186/s12967-023-04705-3)
-> 一个很棒的biomarker挑战赛的结果，用于熟悉目前最佳的范式：Predictive biomarkers of immune checkpoint inhibitor (ICI) efficacy 
+> 一个很棒的biomarker挑战赛的结果，用于熟悉目前最佳的范式：Predictive biomarkers of immune checkpoint inhibitor (ICI) efficacy
+- [RA biomarker](https://github.com/drychkov/RA_biomarkers)
+> 这个项目最大的亮点是，它是用RNAseq并使用R package caret做的分析
 - []()
 
 ## diary or logs
