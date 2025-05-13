@@ -1,7 +1,13 @@
+## bioconductor
+
+- [bioconductor course-materials](https://bioconductor.org/help/course-materials/)
+
 ## bulk RNAseq
 
 ## scRNAseq
 
+- [OSCA scRNAseq](https://bioconductor.org/books/release/OSCA/)
+- 
 ### scanpy
 
 - [NBIS scanpy]()
@@ -13,7 +19,8 @@
 ## RNAseqR
 
 - [RNAseq123]()
-- 
+- [bioconductor deseq2](https://bioconductor.github.io/BiocWorkshops/rna-seq-data-analysis-with-deseq2.html)
+
 
 ## nbisweden training
 
