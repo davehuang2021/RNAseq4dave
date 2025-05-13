@@ -17,6 +17,9 @@
 
 ## Technology
 
+### shiny 
+[shiny for python](https://shiny.posit.co/py/docs/overview.html)
+
 ## website and links
 
 [Obsidian + ChatGPT + Excalidraw：打造高效学习与知识沉淀系统](https://www.ifb.me/zh/blog/ai/obsidian)
