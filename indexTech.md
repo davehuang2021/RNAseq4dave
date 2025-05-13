@@ -33,7 +33,7 @@
 
 ### scanpy
 
-- [NBIS scanpy](https://nbisweden.github.io/workshop-scRNAseq/home_contents.html)
+- [#ref NBIS scanpy](https://nbisweden.github.io/workshop-scRNAseq/home_contents.html)
 - [NBIS scRNAseq 2023](https://nbisweden.github.io/workshop-scrnaseq-2023/): 这个和最新版本比，数据上差别不大
 - [NBIS youtube](https://youtube.com/playlist?list=PLBsJUKzoJTHQA4Qg1yc1RRY2Km4t4vEeN&si=p37W8NwQREqf617q)
 - [Pearson residuals for normalization of single-cell RNA-seq UMI data](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02451-7)
