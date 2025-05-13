@@ -1,0 +1,441 @@
+---
+title: GSE166927
+output: html_notebook
+---
+
+## system
+
+-   cmd+D: 删除光标所在当前行:
+
+-   alt+-: 插入赋值号 \<- : Alt + -（R语言里几乎最常用的快捷键了）
+
+-   插入管道操作符 : Ctrl + Shift + M（和tidyverse配套使用有奇效）
+
+-   ctrl+shift+c: 注视掉所选代码块
+
+-   执行行：cmd+enter
+
+-   执行块：shift+cmd+enter
+
+```{r}
+system("open .")
+```
+
+```{r}
+# BiocManager::install("BiocStyle")
+# BiocManager::install("limma")
+# BiocManager::install("Glimma")
+# BiocManager::install("tidyverse",force = TRUE)
+# BiocManager::install("Mus.musculus",force = TRUE)
+# BiocManager::install("Homo.sapiens",force = TRUE)
+
+# BiocManager::install("dplyr",force = TRUE)
+# BiocManager::install("GEOquery",force = TRUE)
+# BiocManager::install("tidyverse")
+# BiocManager::install("Homo.sapiens")
+```
+
+## setup
+
+```{r}
+#setwd("/Users/m1/JobSkills/R/DEG/GSE117993/") 
+```
+
+```{r}
+library(BiocStyle)
+library(knitr)
+options(digits=3)
+options(width=120)
+```
+
+## library
+
+```{r}
+# library(tidyverse)
+library(limma)
+library(Glimma)
+library(edgeR)
+# library(tximport)
+library(GEOquery)
+library(Homo.sapiens)
+library(recount3)
+library(DESeq2)
+```
+
+-   [GSE117993](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE117993)
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+rse <- recount3::create_rse_manual(
+    project = "SRP155976",
+    project_home = "data_sources/sra",
+    organism = "human",
+    annotation = "gencode_v26",
+    type = "gene"
+)
+```
+
+## read counts from recount
+
+```{r}
+assays(rse)$counts<-transform_counts(rse)
+rse
+# recount3::transform_counts()
+```
+
+获取group信息，分组信息，做差异表达必须。
+
+```{r}
+write.table(rse@colData, file = "colData.tsv", sep = "\t", row.names = FALSE, col.names = TRUE)
+sample_title<-rse@colData$sra.sample_title
+### 修剪字符串
+sample_title<-sapply(sample_title, function(x) strsplit(x, split = "_")[[1]][4])
+sample_title[1:10]
+group <- sample_title
+```
+
+```{r}
+unique(group)
+```
+
+## Gene ENSEMBL SYMBOL ENTREZID
+
+```{r}
+### convert exp matrix by ncbi gene, not ENSEMBL
+ensg <- rownames(rse@assays@data$counts) %>% 
+  sapply(function(x) substr(x, 1, 15))
+### 注意这里因为冲突，所有要使用源代码的全名
+genes <- AnnotationDbi::select(
+  Homo.sapiens, 
+  keys=ensg, 
+  columns=c("SYMBOL", 
+            "TXCHROM",
+            "ENTREZID","ENSEMBL"), keytype="ENSEMBL"
+  )
+print("genes dim")
+dim(genes)
+# 75572     4
+
+# genes<- genes %>% 
+#   filter(!is.na(ENTREZID))
+# dim(genes)
+
+genes <- genes[!duplicated(genes$ENSEMBL),]
+print("unique genes")
+dim(genes)
+# 63811     4
+```
+
+## DGEList
+
+```{r}
+x = new("DGEList")
+
+x$counts = rse@assays@data$counts
+
+x$samples = data.frame(
+    "SampleID"=colnames(x$counts), 
+     "group"=group,
+    "lib.size"=colSums(x$counts),
+    "norm.factors" = rep(1,190)
+)
+
+table(rowSums(x$counts==0)==190)
+# FALSE  TRUE 
+# 52486 11370 
+table(rowSums(x$counts>=10)==190)
+# FALSE  TRUE 
+# 47242 16614 
+print('full x')
+dim(x)
+
+cpm <- cpm(x)
+lcpm <- cpm(x, log=TRUE, prior.count=2)
+dim(lcpm)
+
+group<-x$samples$group
+keep.exprs <- filterByExpr(x, min.count=10,group = group)
+x <- x[keep.exprs, keep.lib.sizes=FALSE]
+print('filterByExpr x')
+# [1] 27806   190
+dim(x)
+```
+
+add gene information to x
+
+```{r}
+x$genes <- genes
+dim(x)
+```
+
+```{r}
+# length(rownames(head(x$counts)))
+dim(x$counts)
+dim(x$genes)
+    # x$genes$ENTREZID
+```
+
+## DESEQ2
+
+```{r}
+conditions <- factor(
+    x$samples$group,
+    levels = c("cCD","iCD","NotIBD","UC"))
+
+colData <- data.frame(
+    row.names = colnames(x$counts),
+    condition=conditions)
+
+dds <- DESeqDataSetFromMatrix(
+    x$counts, 
+    colData, 
+    design = ~condition)
+
+dim(dds@assays@data$counts)
+# [1] 27806   190
+dds <- DESeq(dds)
+#获取结果
+```
+
+### p-value hist and output result
+
+```{r}
+results <- list()
+for (t in c("cCD","iCD","UC")){
+    print(t)
+    results[[t]] <- as_tibble(results(dds, contrast = c("condition", "NotIBD", t)),rownames=NA)
+    ### 补充基因信息
+    results[[t]] <- results[[t]] %>%
+      rownames_to_column(var = "RowNames") %>%
+      mutate(ENSEMBL=substr(RowNames, 1, 15)) ### 修建ENSEMBL ID
+    
+   results[[t]] <- results[[t]] %>%
+     left_join(genes[!duplicated(genes[["ENSEMBL"]]),], by = "ENSEMBL")
+    write.table(results[[t]], file = paste("dds",t,'.tsv',sep="_"), sep = "\t", row.names = FALSE, col.names = TRUE)
+    hist(results[[t]]$pvalue,breaks = 50)# ,xlim=c(0,1),ylim=c(0,2000)
+}
+```
+
+### tydeverse
+
+```{r}
+dim(genes)
+dim(filter(genes,!is.na(ENTREZID)))
+```
+
+```{r}
+x$samples$lib.size
+#[1] 32863052 35335491 57160817 51368625 75795034 60517657 55086324 21311068 19958838
+#[1] 12854238 14470865 16528678 14493036 12386107 16700970 15207751 14601062 11996686 16650645 #12946464 13241413  9567869  9960254 12311350 10741452
+#[17] 13193089 15132729 14964557  9337174 12133979 11472487 13432666 11887720
+```
+
+```{r}
+
+L <- mean(x$samples$lib.size) * 1e-6
+M <- median(x$samples$lib.size) * 1e-6
+c(L, M)
+# summary(lcpm)
+```
+
+## filter
+
+```{r}
+lcpm.cutoff <- log2(10/M + 2/L)
+# -2.07
+library(RColorBrewer)
+nsamples <- ncol(x)
+col <- brewer.pal(nsamples, "Paired")
+par(mfrow=c(1,3))
+plot(density(lcpm[,1]), col=col[1], lwd=2, ylim=c(0,0.26), las=2, main="", xlab="")
+title(main="A. Raw data", xlab="Log-cpm")
+abline(v=lcpm.cutoff, lty=3)
+
+for (i in 2:nsamples){
+den <- density(lcpm[,i])
+lines(den$x, den$y, col=col[i], lwd=2)
+}
+legend("topright", x$samples$SampleID, text.col=col, bty="n")
+print('original')
+dim(lcpm)
+
+lcpm <- cpm(x, log=TRUE)
+plot(density(lcpm[,1]), col=col[1], lwd=2, ylim=c(0,0.26), las=2, main="", xlab="")
+title(main="B. Filtered data default", xlab="Log-cpm")
+abline(v=lcpm.cutoff, lty=3)
+for (i in 2:nsamples){
+den <- density(lcpm[,i])
+lines(den$x, den$y, col=col[i], lwd=2)
+}
+legend("topright", x$samples$SampleID, text.col=col, bty="n")
+print('filter')
+dim(lcpm)
+
+### 过滤 logCPM>=10的
+keep <- (rowSums(lcpm<11) == 190) & (filterByExpr(x, min.count=20,group = group))
+x <- x[keep, , keep.lib.sizes=FALSE]
+
+lcpm <- cpm(x, log=TRUE)
+plot(density(lcpm[,1]), col=col[1], lwd=2, ylim=c(0,0.26), las=2, main="", xlab="")
+title(main="B. lcpm Filtered data", xlab="Log-cpm")
+abline(v=lcpm.cutoff, lty=3)
+
+for (i in 2:nsamples){
+den <- density(lcpm[,i])
+lines(den$x, den$y, col=col[i], lwd=2)
+}
+legend("topright", x$samples$SampleID, text.col=col, bty="n")
+print('filter by lcpm')
+dim(lcpm)
+
+
+```
+
+## Filter DESeq2
+
+```{r}
+conditions <- factor(
+    x$samples$group,
+    levels = c("cCD","iCD","NotIBD","UC"))
+
+colData <- data.frame(
+    row.names = colnames(x$counts),
+    condition=conditions)
+
+dds <- DESeqDataSetFromMatrix(
+    x$counts, 
+    colData, 
+    design = ~condition)
+
+dim(dds@assays@data$counts)
+# [1] 24557   190
+
+dds <- DESeq(dds)
+#获取结果
+
+results <- list()
+for (t in c("cCD","iCD","UC")){
+    print(t)
+    results[[t]] <- results(dds, contrast = c("condition", "NotIBD", t))
+    hist(results[[t]]$pvalue,breaks = 50)# ,xlim=c(0,1),ylim=c(0,2000)
+    write.table(results[[t]], file = paste("dds",t,'.tsv',sep="_"), sep = "\t", row.names = TRUE, col.names = TRUE)
+}
+# UC <- results(dds, contrast = c("condition", "NotIBD", "UC"))
+# hist(UC$pvalue,breaks = 50)# ,xlim=c(0,1),ylim=c(0,2000)
+```
+
+```{r}
+x <- calcNormFactors(x, method = "TMM")
+x$samples$norm.factors
+
+```
+
+## Normalization
+
+```{r}
+x2 <- x
+
+par(mfrow=c(1,1))
+lcpm <- cpm(x, log=TRUE)
+boxplot(lcpm, las=2, col=col, main="")
+title(main="A. Example: Unnormalised data",ylab="Log-cpm")
+```
+
+```{r}
+x2 <- calcNormFactors(x2)
+x2$samples$norm.factors
+lcpm <- cpm(x2, log=TRUE)
+boxplot(lcpm, las=2, col=col, main="")
+title(main="B. Example: Normalised data",ylab="Log-cpm")
+
+```
+
+```{r}
+lcpm <- cpm(x, log=TRUE)
+par(mfrow=c(1,2))
+col.group <- x$samples$group
+levels(col.group) <-  brewer.pal(nlevels(col.group), "Set1")
+col.group <- as.character(col.group)
+col.lane <- x$samples$group
+levels(col.lane) <-  brewer.pal(nlevels(col.lane), "Set2")
+col.lane <- as.character(col.lane)
+plotMDS(lcpm, labels=x$samples$group, col=col.group)
+title(main="A. Sample groups")
+plotMDS(lcpm, labels=col.lane, col=col.lane, dim=c(3,4))
+title(main="B. Sequencing lanes")
+
+glMDSPlot(lcpm, labels=x$samples$group, 
+          groups=x$samples[,c(2)], launch=FALSE)
+```
+
+## contr matrix
+
+```{r}
+group<-x$samples$group
+
+design <- model.matrix(~0+group)
+colnames(design) <- gsub("group", "", colnames(design))
+design
+
+contr.matrix <- makeContrasts(
+   NotIBDvsUC        = NotIBD-UC,
+   NotIBDvsiCD.      = NotIBD-iCD,
+   NotIBDvscCD.      = NotIBD-cCD,
+   levels = colnames(design))
+contr.matrix
+
+```
+
+```{r}
+par(mfrow=c(1,2))
+v <- voom(x, design, plot=TRUE)
+v
+
+```
+
+```{r}
+vfit <- lmFit(v, design)
+vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
+efit <- eBayes(vfit)
+plotSA(efit, main="Final model: Mean-variance trend")
+
+```
+
+```{r}
+## decidetests
+summary(decideTests(efit))
+
+tfit <- treat(vfit, lfc=1)
+dt <- decideTests(tfit)
+summary(dt)
+```
+
+```{r}
+de.common <- which(dt[,1]!=0 & dt[,2]!=0)
+length(de.common)
+head(tfit$genes$SYMBOL[de.common], n=20)
+vennDiagram(dt[,1:2], circle.col=c("turquoise", "salmon"))
+write.fit(tfit, dt, file="results.txt")
+
+```
+
+```{r}
+tfit
+```
+
+## p-value of EdgeR
+
+```{r}
+NotIBDvsUC <- topTreat(tfit, coef=1, n=Inf)
+NotIBDvsiCD <- topTreat(tfit, coef=2, n=Inf)
+NotIBDvscCD <- topTreat(tfit, coef=3, n=Inf)
+par(mfrow=c(1,3))
+
+hist(NotIBDvsUC$P.Value,breaks = 50,xlim=c(0,1),ylim=c(0,2000))
+hist(NotIBDvsiCD$P.Value,breaks = 50,xlim=c(0,1),ylim=c(0,2000))
+hist(NotIBDvscCD$P.Value,breaks = 50,xlim=c(0,1),ylim=c(0,2000))
+
+```
