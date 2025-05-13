@@ -4,6 +4,9 @@
 
 ## website and links
 
+[Obsidian + ChatGPT + Excalidraw：打造高效学习与知识沉淀系统](https://www.ifb.me/zh/blog/ai/obsidian)
+>
+
 ## diary or logs
 
 ### 2025-5-13
