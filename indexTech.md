@@ -6,25 +6,30 @@
 
 - [算法教材](https://image.sciencenet.cn/olddata/kexue.com.cn/upload/blog/file/2010/8/201085202046634460.pdf)
 
+## siRNA
 
+- [pmid28570818](https://pubmed.ncbi.nlm.nih.gov/28570818): # Modification on siRNA
+- [pmid29731743](https://pubmed.ncbi.nlm.nih.gov/29731743): Phosphorodiamidate morpholino oligomers (PMO)
+- [pmid37224533](https://pubmed.ncbi.nlm.nih.gov/37224533)
+- [pmid37224533](https://pubmed.ncbi.nlm.nih.gov/37224533)
+- [pmid39197831](https://pubmed.ncbi.nlm.nih.gov/39197831)
+### AOC
+
+- [pmid37224533](https://pubmed.ncbi.nlm.nih.gov/37224533): targeting TfR1 to deliver oligonucleotides to skeletal muscle, AOC
+### siRNA mouse model
+
+- [pmid29415061](https://pubmed.ncbi.nlm.nih.gov/29415061/)
 ## caret
 
-- [pmid28570818](28570818)
-- pmid29415061
-- pmid29731743
-- pmid37224533
-- pmid37224533
-- pmid37224533
-- pmid39197831
-- pmid34177888, pmid35515003
-- [pmid29261781--Max Kuhn--Feature Selection (FS)]()
+- [pmid34177888](https://pubmed.ncbi.nlm.nih.gov/34177888)
+- [pmid35515003](https://pubmed.ncbi.nlm.nih.gov/35515003)
+- [pmid29261781--Max Kuhn--Feature Selection (FS)](https://pubmed.ncbi.nlm.nih.gov/29261781)
 - [Building Predictive Models in R Using the caret Package]()
 - [Max Kuhn, Kjell Johnson - Applied Predictive Modeling-Springer (2013)]()
 
 ### case study
 
 - [pmid35515003](https://pubmed.ncbi.nlm.nih.gov/35515003/): biomarker, scRNAseq, PBMC
-- 
 
 
 ## scRNAseq
