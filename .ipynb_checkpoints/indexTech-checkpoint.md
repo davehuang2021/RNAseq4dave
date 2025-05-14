@@ -9,7 +9,7 @@
 
 ## caret
 
-- [pmid28570818](28570818)
+- pmid28570818
 - pmid29415061
 - pmid29731743
 - pmid37224533
@@ -66,5 +66,3 @@
 - [nbisweden lab_dge](https://nbisweden.github.io/workshop-RNAseq/1906/lab_dge.html)
 - [NBIS workshop-RNAseq](https://nbisweden.github.io/workshop-RNAseq/)
 - [NBIS scRNAseq V22](https://uppsala.instructure.com/courses/52011/files)
-- [workshop_omics_integration](https://nbisweden.github.io/workshop_omics_integration/schedule.html)
-- 
