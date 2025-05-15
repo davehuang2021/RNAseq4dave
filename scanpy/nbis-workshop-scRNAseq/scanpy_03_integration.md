@@ -28,3 +28,5 @@ scaled data matrix.
 
 - 最popular 的 batch effect remove 方法，但也就是它需要独立安装需要注意一下
 
+效果如下：![scanpy harmony](scanpy_03_integration.png)
+
