@@ -1,6 +1,6 @@
 ## CN note: Data preparation
 
-注意这里保存在 raw的归一化且对数转化后的数据，但为 scale.
+注意这里保存在 raw的归一化且对数转化后的数据，但没做 scale.
 
 ## CN note: 特征选择是找高变异基因
 
@@ -17,7 +17,10 @@ Based on this plot, we can see that the top 8 PCs retain a lot of information, w
 
 We plot the tSNE scatterplot colored by dataset. We can clearly see the effect of batches present in the dataset.
 
-重要的点是如何鉴定和发现批次效应/effect of batches
+**重要的点是如何鉴定和发现批次效应/effect of batches**
+这里的批次效应还是很明显的，特别是**红色的covid 17样品，基本是单独成一簇**
+
+![batch effect](scanpy_02_dimred.png)
 
 ## CN note: UMAP
 
