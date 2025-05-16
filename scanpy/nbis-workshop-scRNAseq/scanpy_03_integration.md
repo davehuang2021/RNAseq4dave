@@ -16,6 +16,7 @@ scaled data matrix.
 - Select all genes that are variable in at least 2 datasets and use for remaining analysis.
     - 选择至少 2 个数据集中可变的所有基因并用于剩余分析。这个解决方案就是排除掉单个批次的因素
 - 注意流程到了哪个阶段：选择完 variable genes 后，把scale 和 PCA 做掉了
+    - [ ] 这里看不懂了，**需要回顾**
 - 这里还注意**保存旧umap&tSNE的方法**
 
 
