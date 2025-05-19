@@ -8,6 +8,22 @@
 - read_10x_mtx 的 prefix 参数用于添加 GEOID这种前置的ID，简化编辑步骤
 - gz文件无需解压即可读取（建议不要解压缩）
 
+```python
+### 非常简单，几本和软件说明书中的写法一样
+adata = sc.read_10x_mtx(
+    path="./data",       # 文件所在目录
+    prefix="GSE149689_",
+    var_names="gene_symbols",  # 用 gene symbol 作为基因名（features.tsv 的第2列）
+    cache=True           # 是否缓存 .h5ad 格式（可加快后续读取）
+)
+```
+### scanpy 教程数据
+
+[ref](https://scanpy.readthedocs.io/en/stable/tutorials/experimental/pearson_residuals.html)
+
+数据可以wget直接下载。
+- [x] 经过了检查，没有和已经发表的数据对应起来。放弃研究可重复性（2025-5-19）
+
 ### GSE149689 实例
 
 [GSE149689是实例数据来源](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE149689)，注意格式是mtx形式 
