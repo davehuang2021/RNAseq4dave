@@ -1,22 +1,21 @@
 
 ### scRNAseq gene exp corr
 
+**虽然 z-score scale 不太会影响 R ，但可视化时候还是要看一下是否用的是 scale后的数据！！！**
+
 ```python
 ### 绘制 scRNAseq 基因表达相关性的图
 sc.pl.scatter(
         Adata[
            (Adata.obs.cell_type=='tumor')
-            &(Adata.obs.patient=='patient1'),
-        ], 
+            &(Adata.obs.patient=='patient1'),], 
         x=gene1, 
         y=gene2,
         color='patient',
         palette=['#1A63BE'],
         size=50,show=False,title='',
     )
-
 ```
-
 
 ### scanpy 提取表达量到 obs
 
@@ -33,8 +32,9 @@ t_adata[((t_adata[: , [gene1_symbl]].X>0) & (t_adata[: , [gene2_symbl]].X>0)),:]
 
 ### scanpy densigy 绘图
 
+这里注意，通常 scale 之后，会有在<0区间产生峰值；之前通常这个峰值在0的位置，也就是未测到表达量基因的信号。
 ```python
-sns.kdeplot(t_adata[: , gene_symbol].X)
+sns.kdeplot(t_adata[: , gene_symbol].X.toarray())
 ```
 
 
