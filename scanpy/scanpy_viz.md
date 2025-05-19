@@ -32,9 +32,16 @@ t_adata[((t_adata[: , [gene1_symbl]].X>0) & (t_adata[: , [gene2_symbl]].X>0)),:]
 
 ### scanpy densigy 绘图
 
-这里注意，通常 scale 之后，会有在<0区间产生峰值；之前通常这个峰值在0的位置，也就是未测到表达量基因的信号。
+- 这里注意，通常 scale 之后，会有在<0区间产生峰值；之前通常这个峰值在0的位置，也就是未测到表达量基因的信号。
+- 这里的绘图是用seaborn实现的
 ```python
+import seaborn as sns
 sns.kdeplot(t_adata[: , gene_symbol].X.toarray())
+### B2M 是普遍高表达的基因
+sns.kdeplot(adata[: , 'B2M'].X.toarray())
+### RPS27 是0位置和高表达都有双峰的基因
+sns.kdeplot(adata[: , 'RPS27'].X.toarray())
+
 ```
 
 
