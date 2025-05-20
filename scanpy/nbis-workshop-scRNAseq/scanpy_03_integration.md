@@ -31,3 +31,40 @@ scaled data matrix.
 
 效果如下：![scanpy harmony](scanpy_03_integration.png)
 
+```python
+for g in genes:
+    plt.rcParams['axes.spines.left']   = True
+    plt.rcParams['axes.spines.right']  = False
+    plt.rcParams['axes.spines.top']    = False
+    plt.rcParams['axes.spines.bottom'] = True
+    
+    plt.figure(figsize=(15, 5))
+    
+    colors = ['#1A63BE','#FBA002',  ]#  '#858CC4',
+    # order = ['normal', 'EAC', 'ESCC']
+
+    # 根据中位数排序
+    value = g+", log2(TPM+1)"
+    medians = exp.groupby('study')[value].median()
+    sorted_categories = medians.sort_values(ascending=False).index
+    print(sorted_categories[0:2])
+    ax =sns.boxplot(y=value,x='study',data=exp[(~exp[value].apply(np.isinf))], 
+                     palette=colors, 
+                     order=sorted_categories,
+                     showfliers=False, width=0.6
+                    )
+    interval = 2
+    # plt.yticks(np.arange(0, np.max(exp[g+", log2TPM"]), interval))
+    plt.yticks(np.arange(-4, 12, interval))
+
+    plt.ylim(bottom=0,top=12)
+    plt.xticks(rotation=90,fontsize=8)
+    plt.title(g+' EXP in GTEx')
+    ### 添加显著性检验的标记： Mann-Whitney： 
+    pairs=[(sorted_categories[0], sorted_categories[1])]
+    annotator = Annotator(ax, pairs, data=exp, x='study', y=g+", log2(TPM+1)", order=sorted_categories)
+    annotator.configure(test='Mann-Whitney', text_format='star', loc='inside') ### 也叫Wilcoxon Rank Sum Test， 威尔科克森秩和检验
+    annotator.apply_and_annotate()
+    plt.savefig('.png', dpi=300, bbox_inches='tight')
+    plt.show()
+```
