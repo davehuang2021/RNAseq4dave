@@ -15,6 +15,10 @@ sc.pl.scatter(
         palette=['#1A63BE'],
         size=50,show=False,title='',
     )
+# import matplotlib.pyplot as plt
+plt.ylim(bottom=-1,top=10)
+plt.xlim(left=7)
+# plt.xticks(rotation=90,fontsize=8)
 ```
 
 ### scanpy 提取表达量到 obs
