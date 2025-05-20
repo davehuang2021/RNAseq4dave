@@ -2,19 +2,21 @@
 
 ## 小结与体会
 
-- 这里做了normalization并保存raw，这里是完整的表达信息，未经过筛选
-- dr会有筛选基因的步骤，仅用于聚类
-- 这个步骤分析后发现了批次效应，引入了下个步骤的integration步骤的必要性
+- 这里做了normalization并保存raw，这里是保存完整的表达数据，未经过筛选（比如高变异基因）
+- dr会有筛选基因（高变异度的基因集）的步骤，仅用于聚类
+- 这个步骤分析后发现了数据的批次效应，引入了在下个步骤做integration步骤的必要性
+- 没必要单独作为一个步骤
 
 
 ## CN note: Data preparation
 
-注意这里保存在 raw的归一化且对数转化后的数据，但没做 scale.
+注意这里保存在 raw的归一化（normalization）且对数转化后的数据，但没做 scale.
 
 ```
 # normalize to depth 10 000
 sc.pp.normalize_total(adata, target_sum=1e4)
 ```
+- [ ] 这个操作的标记，并不确定，需要研究下
 
 ## CN note: 特征选择是找高变异基因
 
@@ -25,6 +27,14 @@ sc.pp.normalize_total(adata, target_sum=1e4)
 
 Based on this plot, we can see that the top 8 PCs retain a lot of information, while other PCs contain progressively less. However, it is still advisable to use more PCs since they might contain information about rare cell types (such as platelets and DCs in this dataset)
 从该图可以看出，前 8 个 PC 保留了大量信息，而其他 PC 保留的信息则逐渐减少。然而，仍然建议使用更多 PC，因为它们可能包含有关稀有细胞类型的信息（例如此数据集中的血小板和树突状细胞）。
+```
+sc.tl.pca(
+    n_comps=n
+### n_comps 用来补充特定的PCA信息，这个可以在对聚类结果标注细胞类型后，再掉头来调试
+#computing PCA
+#    with n_comps=50
+#    finished (0:00:06)
+```
 
 
 ## CN note: tSNE
