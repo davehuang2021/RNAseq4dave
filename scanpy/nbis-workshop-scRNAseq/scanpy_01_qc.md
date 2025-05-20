@@ -1,3 +1,12 @@
+- [ref:NBIS scanpy_01_qc](https://nbisweden.github.io/workshop-scRNAseq/labs/scanpy/scanpy_01_qc.html)
+
+## 小结与体会
+
+- 前置步骤还包括数据的整合和补充meta信息
+- QC的步骤的关键在于去掉不好的细胞和样品，如高线粒体比例细胞，低核糖体比例的，血红蛋白污染，doublets样品等等
+- 细胞检出的基因数量控制
+- 过滤之后保存数据，这里特别注意要保存raw，因为这个步骤得到的数据是必定要后续使用的
+
 ## CN note： Get data
 注意这里样品的文件名已经提示了样品的类型和编号
 
