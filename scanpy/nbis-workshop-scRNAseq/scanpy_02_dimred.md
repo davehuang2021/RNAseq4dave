@@ -1,6 +1,20 @@
+[ref: NBIS scanpy_02_dimred](https://nbisweden.github.io/workshop-scRNAseq/labs/scanpy/scanpy_02_dimred.html)
+
+## 小结与体会
+
+- 这里做了normalization并保存raw，这里是完整的表达信息，未经过筛选
+- dr会有筛选基因的步骤，仅用于聚类
+- 这个步骤分析后发现了批次效应，引入了下个步骤的integration步骤的必要性
+
+
 ## CN note: Data preparation
 
 注意这里保存在 raw的归一化且对数转化后的数据，但没做 scale.
+
+```
+# normalize to depth 10 000
+sc.pp.normalize_total(adata, target_sum=1e4)
+```
 
 ## CN note: 特征选择是找高变异基因
 
