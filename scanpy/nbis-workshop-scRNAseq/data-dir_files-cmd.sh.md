@@ -1,6 +1,9 @@
 
 ```bash
 # 保存文件夹结构
+
+cd ./scanpy/nbis-workshop-scRNAseq/
+
 tree data >data-dir_files.md
 
 # 计算md5用于检查文件的一致性
