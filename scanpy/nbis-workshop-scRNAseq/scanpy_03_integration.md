@@ -49,8 +49,7 @@ print(adata.X[1:50,1:50])
 ## CN note: Detect variable genes
 
 - 不处理批次效应，直接检测变异基因，会混入批次特意基因
-- sc.pp.highly_variable_genes 的 batch_key 参数，在之前的分析中是未启用的
-> - 这里有几个新的参数启用
+- sc.pp.highly_variable_genes 的 batch_key 参数，在之前的分析中未启用
 > - highly_variable_nbatches标记了 variable 出现在多少个批次里
 > - 0 标记了非highly_variable gene
 > - highly_variable_intersection 标记了是否在所有批次里都是 highly_variable gene
@@ -73,6 +72,7 @@ print(adata.X[1:50,1:50])
 效果如下：![scanpy harmony](scanpy_03_integration.png)
 
 ```python
+### logTPM boxplot
 for g in genes:
     plt.rcParams['axes.spines.left']   = True
     plt.rcParams['axes.spines.right']  = False
