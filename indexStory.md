@@ -29,8 +29,6 @@
 
 ### LC
 
-- [[]]
-
 #### TCGA LUAD/LUSC
 
 #### SCLC
