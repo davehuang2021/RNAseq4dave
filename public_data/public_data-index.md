@@ -7,14 +7,17 @@
 
 ## scRNAseq
 
+- liver bulk and sc RNAseq: [gepliver](http://www.gepliver.org/#/download)
 - gut immune cell atlas
 	- [paper](https://www.cell.com/developmental-cell/fulltext/S1534-5807%2820%2930886-8)
 	- [pmid33290721](https://pubmed.ncbi.nlm.nih.gov/33290721)
 	- [推荐下载地址](https://www.gutcellatlas.org/pangi.html)：速度太慢，要几天时间。。。
 	- [官方网站，尚未找到**直接下载地址**, ID: E-MTAB-8901](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-8901)
 	- [ucsc cell browser](https://cells.ucsc.edu/?ds=gut-cell-atlas)
+	- ![[gut immune cell atlas.png|250]]
 - HPA single cell data
 	- 
 - [tabula-sapiens website](https://tabula-sapiens.sf.czbiohub.org/) #HCA, #hs_scRNAseq,
 	- data:[Tabula_Sapiens_v2](http://figshare.com/articles/dataset/Tabula_Sapiens_v2/27921984) 
+	- [ ] 需要解决：检测数据下载的完整性
 
