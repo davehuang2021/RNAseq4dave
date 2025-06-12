@@ -7,7 +7,7 @@
 
 ## scRNAseq
 
-- liver bulk and sc RNAseq: [gepliver](http://www.gepliver.org/#/download)
+- liver bulk and sc RNAseq: [gepliver](http://www.gepliver.org/#/download)：很全面的肝脏单细胞，bulk数据。可以再补充一些小鼠的数据，更能反映药物处理的效果，比如Kupffer/Mac激活产生的Cfb表达上调。
 - gut immune cell atlas
 	- [paper](https://www.cell.com/developmental-cell/fulltext/S1534-5807%2820%2930886-8)
 	- [pmid33290721](https://pubmed.ncbi.nlm.nih.gov/33290721)
