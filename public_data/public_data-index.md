@@ -32,8 +32,11 @@
 	- ![[gut immune cell atlas.png|250]]
 - HPA single cell data
 	- 
+- UC data
+	- [UC scRNAseq: 这个数据似乎不太对但至少提供了](https://cellxgene.cziscience.com/collections/33d19f34-87f5-455b-8ca5-9023a2e5453d)
 - [tabula-sapiens website](https://tabula-sapiens.sf.czbiohub.org/) #HCA, #hs_scRNAseq,
 	- data:[Tabula_Sapiens_v2](http://figshare.com/articles/dataset/Tabula_Sapiens_v2/27921984) 
 	- [cellxgene version](https://cellxgene.cziscience.com/collections/e5f58829-1a66-40b5-a624-9046778e74f5)
 	- [ ] 需要解决：检测数据下载的完整性
+
 
