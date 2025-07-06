@@ -16,11 +16,20 @@ output: html_notebook
 # BiocManager::install("GEOquery")
 # BiocManager::install("limma")å
 # BiocManager::install("umap")
+# BiocManager::install("affy")
+# BiocManager::install("annotate")
+# BiocManager::install("hgu133plus2.db")
+
 
 library(GEOquery)
 library(limma)
 library(umap)
 
+library(dplyr)
+
+library(affy)
+library(annotate)
+library(hgu133plus2.db)
 ```
 
 ## code
@@ -38,6 +47,31 @@ gset <- gset[[idx]]
 
 ex <- exprs(gset)
 write.csv(ex,file = './ex.csv')
+
+```
+
+```{r}
+
+gene_exprs <- exprs_annot %>%
+  group_by(GeneSymbol) %>%
+  summarise(across(where(is.numeric), max, na.rm=TRUE)) %>%
+  column_to_rownames("GeneSymbol")
+
+
+library(affy)
+library(annotate)
+library(hgu133plus2.db)
+
+# eset 是 ExpressionSet 对象
+probe_ids <- featureNames(eset)
+gene_symbols <- getSYMBOL(probe_ids, "hgu133plus2")
+
+exprs_df <- as.data.frame(exprs(eset))
+exprs_df$GeneSymbol <- gene_symbols
+```
+
+```{r}
+
 # log2 transform
 qx <- as.numeric(quantile(ex, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
 LogC <- (qx[5] > 100) ||
