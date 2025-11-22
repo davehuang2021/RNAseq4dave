@@ -32,6 +32,17 @@ library(annotate)
 library(hgu133plus2.db)
 ```
 
+```{r}
+
+my_list <- list("apple", "banana", "cherry", "date")
+positions <- c(4,1, 3,2)
+selected <- my_list[positions]
+ test_df <- data.frame(
+   positions=positions
+ )
+ test_df$my_list <- selected
+```
+
 ## code
 
 ```{r}

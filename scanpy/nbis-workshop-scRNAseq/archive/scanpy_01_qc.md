@@ -23,28 +23,7 @@ our paths.
 
       % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                      Dload  Upload   Total   Spent    Left  Speed
-    100 4312k  100 4312k    0     0  1179k      0  0:00:03  0:00:03 --:--:-- 1179k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 3717k  100 3717k    0     0  1089k      0  0:00:03  0:00:03 --:--:-- 1088k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 4749k  100 4749k    0     0  1347k      0  0:00:03  0:00:03 --:--:-- 1347k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 3789k  100 3789k    0     0  1086k      0  0:00:03  0:00:03 --:--:-- 1085k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 3230k  100 3230k    0     0   925k      0  0:00:03  0:00:03 --:--:--  925k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 2248k  100 2248k    0     0   619k      0  0:00:03  0:00:03 --:--:--  619k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 4228k  100 4228k    0     0  1268k      0  0:00:03  0:00:03 --:--:-- 1268k
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 3495k  100 3495k    0     0  1053k      0  0:00:03  0:00:03 --:--:-- 1053k
+    100 4312k  100 4312k    0     0   610k      0  0:00:07  0:00:07 --:--:-- 1019k
 
 
 With data in place, now we can start loading libraries we will use in
@@ -89,7 +68,7 @@ overlapping barcodes between the datasets. After that we add a column
 
 
 
-    126
+    146
 
 
 
@@ -644,7 +623,7 @@ S and G2M phase genes. We first download the file.
 
       % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                      Dload  Upload   Total   Spent    Left  Speed
-    100   556  100   556    0     0    323      0  0:00:01  0:00:01 --:--:--   323
+    100   556  100   556    0     0    185      0  0:00:03  0:00:02  0:00:01   185
 
 
     97
@@ -901,7 +880,7 @@ the doublet predictions. We will go through these steps in more detail
 in the later exercises.
 
     extracting highly variable genes
-        finished (0:00:01)
+        finished (0:00:00)
     --> added
         'highly_variable', boolean vector (adata.var)
         'means', float vector (adata.var)
@@ -916,7 +895,7 @@ in the later exercises.
         using 'X_pca' with n_pcs = 40
         finished: added to `.uns['neighbors']`
         `.obsp['distances']`, distances for each pair of neighbors
-        `.obsp['connectivities']`, weighted adjacency matrix (0:00:04)
+        `.obsp['connectivities']`, weighted adjacency matrix (0:00:03)
     computing UMAP
         finished: added
         'X_umap', UMAP coordinates (adata.obsm)
@@ -1194,14 +1173,13 @@ Click here
 
 ## archive
 
-    [NbConvertApp] Making directory archive
-    [NbConvertApp] Converting notebook scanpy_01_qc--test.ipynb to html
+    [NbConvertApp] Converting notebook scanpy_01_qc.ipynb to html
     [NbConvertApp] WARNING | Alternative text is missing on 10 image(s).
-    [NbConvertApp] Writing 2803234 bytes to archive/scanpy_01_qc--test.html
+    [NbConvertApp] Writing 2804973 bytes to archive/scanpy_01_qc.html
 
 
-    [NbConvertApp] Converting notebook scanpy_01_qc--test.ipynb to markdown
-    [NbConvertApp] Support files will be in scanpy_01_qc--test_files/
-    [NbConvertApp] Making directory archive/scanpy_01_qc--test_files
-    [NbConvertApp] Writing 41622 bytes to archive/scanpy_01_qc--test.md
+    [NbConvertApp] Converting notebook scanpy_01_qc.ipynb to markdown
+    [NbConvertApp] Support files will be in scanpy_01_qc_files/
+    [NbConvertApp] Making directory archive/scanpy_01_qc_files
+    [NbConvertApp] Writing 42070 bytes to archive/scanpy_01_qc.md
 

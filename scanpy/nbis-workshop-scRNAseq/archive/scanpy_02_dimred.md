@@ -24,11 +24,6 @@ from the previous step.
 注意这里保存在 raw的归一化且对数转化后的数据，但没做 scale.
 
 
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100  181M  100  181M    0     0  9099k      0  0:00:20  0:00:20 --:--:-- 10.6M
-
-
 
 
 
@@ -243,6 +238,15 @@ We can now run [UMAP](https://arxiv.org/abs/1802.03426) for cell
 embeddings.
 
     computing UMAP
+        finished: added
+        'X_umap', UMAP coordinates (adata.obsm)
+        'umap', UMAP parameters (adata.uns) (0:00:05)
+
+
+
+    
+![png](scanpy_02_dimred_files/scanpy_02_dimred_32_1.png)
+    
 
 
 UMAP is plotted colored per dataset. Although less distinct as in the
@@ -419,10 +423,10 @@ Click here
     </thead>
     <tbody>
         <tr><td>Python</td><td>3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 12:55:12) [Clang 14.0.6 ]</td></tr>
-        <tr><td>OS</td><td>macOS-15.4.1-arm64-arm-64bit</td></tr>
-        <tr><td>CPU</td><td>10 logical CPU cores, arm</td></tr>
+        <tr><td>OS</td><td>macOS-15.5-arm64-arm-64bit</td></tr>
+        <tr><td>CPU</td><td>12 logical CPU cores, arm</td></tr>
         <tr><td>GPU</td><td>No GPU found</td></tr>
-        <tr><td>Updated</td><td>2025-05-15 13:29</td></tr>
+        <tr><td>Updated</td><td>2025-05-23 09:16</td></tr>
     </tbody>
         </table>
 
@@ -434,62 +438,62 @@ Click here
     <tr><th>Dependency</th><th>Version</th></tr>
 </thead>
 <tbody>
+    <tr><td>pyparsing</td><td>3.2.3</td></tr>
+    <tr><td>PyYAML</td><td>6.0.2</td></tr>
+    <tr><td>Pygments</td><td>2.19.1</td></tr>
+    <tr><td>cffi</td><td>1.17.1</td></tr>
+    <tr><td>igraph</td><td>0.11.8</td></tr>
+    <tr><td>umap-learn</td><td>0.5.7</td></tr>
+    <tr><td>pyzmq</td><td>26.2.0</td></tr>
+    <tr><td>charset-normalizer</td><td>3.3.2</td></tr>
+    <tr><td>natsort</td><td>8.4.0</td></tr>
+    <tr><td>executing</td><td>0.8.3</td></tr>
+    <tr><td>traitlets</td><td>5.14.3</td></tr>
+    <tr><td>texttable</td><td>1.7.0</td></tr>
+    <tr><td>joblib</td><td>1.5.0</td></tr>
+    <tr><td>packaging</td><td>24.2</td></tr>
+    <tr><td>h5py</td><td>3.13.0</td></tr>
+    <tr><td>wcwidth</td><td>0.2.5</td></tr>
+    <tr><td>llvmlite</td><td>0.44.0</td></tr>
+    <tr><td>session-info2</td><td>0.1.2</td></tr>
+    <tr><td>defusedxml</td><td>0.7.1</td></tr>
+    <tr><td>prompt-toolkit</td><td>3.0.43</td></tr>
+    <tr><td>pure-eval</td><td>0.2.2</td></tr>
+    <tr><td>pytz</td><td>2025.2</td></tr>
+    <tr><td>leidenalg</td><td>0.10.2</td></tr>
+    <tr><td>Cython</td><td>3.1.0</td></tr>
+    <tr><td>typing_extensions</td><td>4.12.2</td></tr>
+    <tr><td>scikit-learn</td><td>1.5.2</td></tr>
+    <tr><td>platformdirs</td><td>4.3.7</td></tr>
+    <tr><td>kiwisolver</td><td>1.4.8</td></tr>
+    <tr><td>tqdm</td><td>4.67.1</td></tr>
+    <tr><td>python-dateutil</td><td>2.9.0.post0</td></tr>
+    <tr><td>ipykernel</td><td>6.29.5</td></tr>
+    <tr><td>debugpy</td><td>1.8.11</td></tr>
+    <tr><td>pycparser</td><td>2.21</td></tr>
+    <tr><td>six</td><td>1.17.0</td></tr>
+    <tr><td>threadpoolctl</td><td>3.6.0</td></tr>
+    <tr><td>matplotlib-inline</td><td>0.1.6</td></tr>
+    <tr><td>legacy-api-wrap</td><td>1.4.1</td></tr>
+    <tr><td>networkx</td><td>3.4.2</td></tr>
+    <tr><td>cycler</td><td>0.12.1</td></tr>
+    <tr><td>numba</td><td>0.61.2</td></tr>
+    <tr><td>stack-data</td><td>0.2.0</td></tr>
     <tr><td>asttokens</td><td>3.0.0</td></tr>
     <tr><td>tornado</td><td>6.4.2</td></tr>
-    <tr><td>stack-data</td><td>0.2.0</td></tr>
-    <tr><td>threadpoolctl</td><td>3.6.0</td></tr>
-    <tr><td>comm</td><td>0.2.1</td></tr>
-    <tr><td>natsort</td><td>8.4.0</td></tr>
-    <tr><td>psutil</td><td>5.9.0</td></tr>
-    <tr><td>python-dateutil</td><td>2.9.0.post0</td></tr>
-    <tr><td>charset-normalizer</td><td>3.3.2</td></tr>
-    <tr><td>h5py</td><td>3.13.0</td></tr>
-    <tr><td>joblib</td><td>1.5.0</td></tr>
-    <tr><td>pycparser</td><td>2.21</td></tr>
-    <tr><td>matplotlib-inline</td><td>0.1.6</td></tr>
-    <tr><td>PyYAML</td><td>6.0.2</td></tr>
-    <tr><td>jedi</td><td>0.19.2</td></tr>
-    <tr><td>pytz</td><td>2025.2</td></tr>
-    <tr><td>ipykernel</td><td>6.29.5</td></tr>
-    <tr><td>umap-learn</td><td>0.5.7</td></tr>
-    <tr><td>six</td><td>1.17.0</td></tr>
-    <tr><td>pyzmq</td><td>26.2.0</td></tr>
-    <tr><td>Pygments</td><td>2.19.1</td></tr>
-    <tr><td>pillow</td><td>11.2.1</td></tr>
-    <tr><td>executing</td><td>0.8.3</td></tr>
-    <tr><td>networkx</td><td>3.4.2</td></tr>
-    <tr><td>kiwisolver</td><td>1.4.8</td></tr>
     <tr><td>scipy</td><td>1.15.3</td></tr>
-    <tr><td>texttable</td><td>1.7.0</td></tr>
-    <tr><td>wcwidth</td><td>0.2.5</td></tr>
-    <tr><td>platformdirs</td><td>4.3.7</td></tr>
-    <tr><td>pyparsing</td><td>3.2.3</td></tr>
-    <tr><td>jupyter_client</td><td>8.6.3</td></tr>
-    <tr><td>numba</td><td>0.61.2</td></tr>
-    <tr><td>appnope</td><td>0.1.3</td></tr>
-    <tr><td>cycler</td><td>0.12.1</td></tr>
-    <tr><td>decorator</td><td>5.1.1</td></tr>
-    <tr><td>prompt-toolkit</td><td>3.0.43</td></tr>
-    <tr><td>packaging</td><td>24.2</td></tr>
-    <tr><td>pynndescent</td><td>0.5.13</td></tr>
-    <tr><td>ipython</td><td>9.1.0</td></tr>
-    <tr><td>tqdm</td><td>4.67.1</td></tr>
-    <tr><td>legacy-api-wrap</td><td>1.4.1</td></tr>
-    <tr><td>defusedxml</td><td>0.7.1</td></tr>
-    <tr><td>llvmlite</td><td>0.44.0</td></tr>
-    <tr><td>Cython</td><td>3.1.0</td></tr>
-    <tr><td>leidenalg</td><td>0.10.2</td></tr>
-    <tr><td>typing_extensions</td><td>4.12.2</td></tr>
-    <tr><td>cffi</td><td>1.17.1</td></tr>
     <tr><td>jupyter_core</td><td>5.7.2</td></tr>
-    <tr><td>pure-eval</td><td>0.2.2</td></tr>
-    <tr><td>session-info2</td><td>0.1.2</td></tr>
-    <tr><td>scikit-learn</td><td>1.5.2</td></tr>
     <tr><td>setuptools</td><td>78.1.1</td></tr>
-    <tr><td>igraph</td><td>0.11.8</td></tr>
-    <tr><td>debugpy</td><td>1.8.11</td></tr>
-    <tr><td>traitlets</td><td>5.14.3</td></tr>
+    <tr><td>appnope</td><td>0.1.3</td></tr>
+    <tr><td>pynndescent</td><td>0.5.13</td></tr>
+    <tr><td>psutil</td><td>5.9.0</td></tr>
+    <tr><td>jedi</td><td>0.19.2</td></tr>
+    <tr><td>comm</td><td>0.2.1</td></tr>
     <tr><td>parso</td><td>0.8.4</td></tr>
+    <tr><td>decorator</td><td>5.1.1</td></tr>
+    <tr><td>pillow</td><td>11.2.1</td></tr>
+    <tr><td>ipython</td><td>9.1.0</td></tr>
+    <tr><td>jupyter_client</td><td>8.6.3</td></tr>
 </tbody>
     </table>
 </div>
@@ -506,70 +510,70 @@ Click here
 
 | Dependency         | Version     |
 | ------------------ | ----------- |
+| pyparsing          | 3.2.3       |
+| PyYAML             | 6.0.2       |
+| Pygments           | 2.19.1      |
+| cffi               | 1.17.1      |
+| igraph             | 0.11.8      |
+| umap-learn         | 0.5.7       |
+| pyzmq              | 26.2.0      |
+| charset-normalizer | 3.3.2       |
+| natsort            | 8.4.0       |
+| executing          | 0.8.3       |
+| traitlets          | 5.14.3      |
+| texttable          | 1.7.0       |
+| joblib             | 1.5.0       |
+| packaging          | 24.2        |
+| h5py               | 3.13.0      |
+| wcwidth            | 0.2.5       |
+| llvmlite           | 0.44.0      |
+| session-info2      | 0.1.2       |
+| defusedxml         | 0.7.1       |
+| prompt-toolkit     | 3.0.43      |
+| pure-eval          | 0.2.2       |
+| pytz               | 2025.2      |
+| leidenalg          | 0.10.2      |
+| Cython             | 3.1.0       |
+| typing_extensions  | 4.12.2      |
+| scikit-learn       | 1.5.2       |
+| platformdirs       | 4.3.7       |
+| kiwisolver         | 1.4.8       |
+| tqdm               | 4.67.1      |
+| python-dateutil    | 2.9.0.post0 |
+| ipykernel          | 6.29.5      |
+| debugpy            | 1.8.11      |
+| pycparser          | 2.21        |
+| six                | 1.17.0      |
+| threadpoolctl      | 3.6.0       |
+| matplotlib-inline  | 0.1.6       |
+| legacy-api-wrap    | 1.4.1       |
+| networkx           | 3.4.2       |
+| cycler             | 0.12.1      |
+| numba              | 0.61.2      |
+| stack-data         | 0.2.0       |
 | asttokens          | 3.0.0       |
 | tornado            | 6.4.2       |
-| stack-data         | 0.2.0       |
-| threadpoolctl      | 3.6.0       |
-| comm               | 0.2.1       |
-| natsort            | 8.4.0       |
-| psutil             | 5.9.0       |
-| python-dateutil    | 2.9.0.post0 |
-| charset-normalizer | 3.3.2       |
-| h5py               | 3.13.0      |
-| joblib             | 1.5.0       |
-| pycparser          | 2.21        |
-| matplotlib-inline  | 0.1.6       |
-| PyYAML             | 6.0.2       |
-| jedi               | 0.19.2      |
-| pytz               | 2025.2      |
-| ipykernel          | 6.29.5      |
-| umap-learn         | 0.5.7       |
-| six                | 1.17.0      |
-| pyzmq              | 26.2.0      |
-| Pygments           | 2.19.1      |
-| pillow             | 11.2.1      |
-| executing          | 0.8.3       |
-| networkx           | 3.4.2       |
-| kiwisolver         | 1.4.8       |
 | scipy              | 1.15.3      |
-| texttable          | 1.7.0       |
-| wcwidth            | 0.2.5       |
-| platformdirs       | 4.3.7       |
-| pyparsing          | 3.2.3       |
-| jupyter_client     | 8.6.3       |
-| numba              | 0.61.2      |
-| appnope            | 0.1.3       |
-| cycler             | 0.12.1      |
-| decorator          | 5.1.1       |
-| prompt-toolkit     | 3.0.43      |
-| packaging          | 24.2        |
-| pynndescent        | 0.5.13      |
-| ipython            | 9.1.0       |
-| tqdm               | 4.67.1      |
-| legacy-api-wrap    | 1.4.1       |
-| defusedxml         | 0.7.1       |
-| llvmlite           | 0.44.0      |
-| Cython             | 3.1.0       |
-| leidenalg          | 0.10.2      |
-| typing_extensions  | 4.12.2      |
-| cffi               | 1.17.1      |
 | jupyter_core       | 5.7.2       |
-| pure-eval          | 0.2.2       |
-| session-info2      | 0.1.2       |
-| scikit-learn       | 1.5.2       |
 | setuptools         | 78.1.1      |
-| igraph             | 0.11.8      |
-| debugpy            | 1.8.11      |
-| traitlets          | 5.14.3      |
+| appnope            | 0.1.3       |
+| pynndescent        | 0.5.13      |
+| psutil             | 5.9.0       |
+| jedi               | 0.19.2      |
+| comm               | 0.2.1       |
 | parso              | 0.8.4       |
+| decorator          | 5.1.1       |
+| pillow             | 11.2.1      |
+| ipython            | 9.1.0       |
+| jupyter_client     | 8.6.3       |
 
 | Component | Info                                                                                |
 | --------- | ----------------------------------------------------------------------------------- |
 | Python    | 3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 12:55:12) [Clang 14.0.6 ] |
-| OS        | macOS-15.4.1-arm64-arm-64bit                                                        |
-| CPU       | 10 logical CPU cores, arm                                                           |
+| OS        | macOS-15.5-arm64-arm-64bit                                                          |
+| CPU       | 12 logical CPU cores, arm                                                           |
 | GPU       | No GPU found                                                                        |
-| Updated   | 2025-05-15 13:29                                                                    |</pre>
+| Updated   | 2025-05-23 09:16                                                                    |</pre>
         </details>
 
 
@@ -580,50 +584,8 @@ Click here
 
 ## archive
 
-
-    ---------------------------------------------------------------------------
-
-    PermissionError                           Traceback (most recent call last)
-
-    Cell In[1], line 1
-    ----> 1 get_ipython().system('jupyter nbconvert --output-dir archive --to markdown --no-input scanpy_01_qc.ipynb')
-
-
-    File /opt/anaconda3/envs/scanpy/lib/python3.12/site-packages/ipykernel/zmqshell.py:657, in ZMQInteractiveShell.system_piped(self, cmd)
-        655         self.user_ns["_exit_code"] = system(cmd)
-        656 else:
-    --> 657     self.user_ns["_exit_code"] = system(self.var_expand(cmd, depth=1))
-
-
-    File /opt/anaconda3/envs/scanpy/lib/python3.12/site-packages/IPython/utils/_process_posix.py:98, in ProcessHandler.system(self, cmd)
-         86 def system(self, cmd: str) -> int:
-         87     """Execute a command in a subshell.
-         88 
-         89     Parameters
-       (...)     96     int : child's exitstatus
-         97     """
-    ---> 98     import pexpect
-        100     # Get likely encoding for the output.
-        101     enc = DEFAULT_ENCODING
-
-
-    File <frozen importlib._bootstrap>:1360, in _find_and_load(name, import_)
-
-
-    File <frozen importlib._bootstrap>:1322, in _find_and_load_unlocked(name, import_)
-
-
-    File <frozen importlib._bootstrap>:1262, in _find_spec(name, path, target)
-
-
-    File <frozen importlib._bootstrap_external>:1532, in find_spec(cls, fullname, path, target)
-
-
-    File <frozen importlib._bootstrap_external>:1504, in _get_spec(cls, fullname, path, target)
-
-
-    File <frozen importlib._bootstrap_external>:1483, in _path_importer_cache(cls, path)
-
-
-    PermissionError: [Errno 1] Operation not permitted
+    [NbConvertApp] Converting notebook scanpy_02_dimred.ipynb to markdown
+    [NbConvertApp] Support files will be in scanpy_02_dimred_files/
+    [NbConvertApp] Making directory archive/scanpy_02_dimred_files
+    [NbConvertApp] Writing 20919 bytes to archive/scanpy_02_dimred.md
 
